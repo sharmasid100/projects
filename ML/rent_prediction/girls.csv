@@ -1,0 +1,20 @@
+Name,commodity_score,room_services_score,members,size,type,room_score,attached_washroom,locality,electricity,wifi,security,rent,deposit
+Disha Dubey,5,10,3,150,Hostel ,3,0,nit,1,1,5,0,37015
+Yashi Pandey,5,10,3,150,Hostel ,3,0,nit,1,1,5,0,37015
+Vrinda Bhatt,5,10,3,150,Hostel ,3,0,nit,1,1,5,0,37015
+Supriya,5,10,3,150,Hostel ,3,0,nit,1,1,5,0,37015
+Ankita,5,10,3,150,Hostel ,3,0,nit,1,1,5,0,37015
+Sejal,5,10,3,150,Hostel ,3,0,nit,1,1,5,0,37015
+Annanya Sinha,5,10,2,110,Hostel,3,0,nit,1,1,5,0,37015
+Pragya,5,10,2,110,Hostel ,3,0,nit,1,1,5,0,37015
+M Hemja,12,10,2,110,PG,4.5,1,Saraswati Nagar,1,1,5,3000,13000
+Preethi,12,10,2,110,PG,4.5,1,Saraswati Nagar,1,1,5,3000,13000
+Manprabh Kaur,12,10,2,110,PG,4.5,1,Saraswati Nagar,1,1,5,4000,15000
+Sushmita,12,10,2,110,PG,4.5,1,Saraswati Nagar,1,1,5,4000,15000
+Ankita Ghosh,12,10,2,110,PG,4.5,1,Saraswati Nagar,1,1,5,4000,15000
+Puja Saxena,12,10,2,110,PG,4.5,1,Saraswati Nagar,1,1,5,4000,15000
+Anjali Chaurasia,12,10,2,110,PG,4.5,1,Saraswati Nagar,1,1,5,4000,15000
+Mahi,5,6,2,110,PG,5,1,Kota,0,1,5,3000,0
+Meena,5,6,2,110,PG,5,1,Kota,0,1,5,3000,0
+Richa,5,6,1,110,PG,5,1,Kota,0,1,5,6000,0
+Swati,4,1,1,110,Apartment,3.5,1,Kota,1,0,5,3500,3500
