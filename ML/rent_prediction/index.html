@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Rent Prediction App</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #a8edea, #fed6e3);
+    margin: 0;
+    padding: 40px 20px;
+  }
+
+  .container {
+    max-width: 650px;
+    background: white;
+    margin: auto;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    padding: 30px 40px;
+  }
+
+  h1 {
+    text-align: center;
+    color: #4a148c;
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  section {
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+  section:last-of-type {
+    border-bottom: none;
+  }
+
+  section h2 {
+    color: #6a1b9a;
+    margin-bottom: 15px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    border-left: 6px solid #ce93d8;
+    padding-left: 12px;
+  }
+
+  label {
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #4a148c;
+    display: block;
+  }
+
+  input[type=number],
+  select {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 18px;
+    border: 2px solid #ce93d8;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  input[type=number]:focus,
+  select:focus {
+    border-color: #7b1fa2;
+    outline: none;
+  }
+
+  button {
+    background: #6a1b9a;
+    color: white;
+    font-weight: 700;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+  }
+
+  button:hover {
+    background: #4a148c;
+  }
+
+  /* Toggle Switches container */
+  .toggles-section {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+  }
+
+  /* Toggle switch styling */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 52px;
+    height: 28px;
+  }
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 28px;
+  }
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+  }
+  input:checked + .slider {
+    background-color: #7b1fa2;
+  }
+  input:checked + .slider:before {
+    transform: translateX(24px);
+  }
+
+  .toggle-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 600;
+    color: #6a1b9a;
+    font-size: 0.95rem;
+    user-select: none;
+  }
+
+  /* Icons with inputs */
+  label.icon-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+  }
+  label.icon-label span {
+    font-size: 1.3rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🏠 Rent Prediction App</h1>
+
+  <form method="post" action="/predict">
+
+    <section>
+      <h2>🏢 Property Details</h2>
+      <label class="icon-label" for="facility"><span>🔧</span> Facility Score (1-15)</label>
+      <input type="number" id="facility" name="facility" min="1" max="15" required />
+
+      <label class="icon-label" for="services"><span>🛎️</span> Services Score (1-10)</label>
+      <input type="number" id="services" name="services" min="1" max="10" required />
+
+      <label class="icon-label" for="members"><span>👥</span> Members (1-4)</label>
+      <input type="number" id="members" name="members" min="1" max="4" required />
+
+      <label class="icon-label" for="size"><span>📏</span> Size (sq ft)</label>
+      <select id="size" name="size" required>
+        <option value="">Select size</option>
+        <option value="60">60</option>
+        <option value="90">90</option>
+        <option value="110">110</option>
+        <option value="150">150</option>
+        <option value="180">180</option>
+      </select>
+
+      <label class="icon-label" for="type"><span>🏠</span> Type</label>
+      <select id="type" name="type" required>
+        <option value="">Select type</option>
+        <option value="apartment">Apartment</option>
+        <option value="pg">PG</option>
+        <option value="hostel">Hostel</option>
+      </select>
+
+      <label class="icon-label" for="appearance_score"><span>✨</span> Appearance Score (1-5)</label>
+      <input type="number" id="appearance_score" name="appearance_score" min="1" max="5" required />
+    </section>
+
+    <section>
+      <h2>📍 Location & Security</h2>
+
+      <label class="icon-label" for="location"><span>📌</span> Location</label>
+      <select id="location" name="location" required>
+        <option value="">Select location</option>
+        <option value="NIT">NIT</option>
+        <option value="Sarawati Nagar">Sarawati Nagar</option>
+        <option value="Kota">Kota</option>
+        <option value="DDU">DDU</option>
+        <option value="Amanaka">Amanaka</option>
+        <option value="Ambedkar Ngar">Ambedkar Ngar</option>
+        <option value="golchowk">Golchowk</option>
+      </select>
+
+      <label class="icon-label" for="security_rating"><span>🔒</span> Security Rating (1-5)</label>
+      <input type="number" id="security_rating" name="security_rating" min="1" max="5" required />
+    </section>
+
+    <section class="toggles-section" aria-label="Toggle Options">
+      <label class="toggle-label">
+        Attached Washroom
+        <label class="switch">
+          <input type="checkbox" name="attached_washroom" value="1" />
+          <span class="slider"></span>
+        </label>
+      </label>
+
+      <label class="toggle-label">
+        Electricity
+        <label class="switch">
+          <input type="checkbox" name="electricity" value="1" />
+          <span class="slider"></span>
+        </label>
+      </label>
+
+      <label class="toggle-label">
+        WiFi
+        <label class="switch">
+          <input type="checkbox" name="wifi" value="1" />
+          <span class="slider"></span>
+        </label>
+      </label>
+    </section>
+
+    <button type="submit">Predict Rent 💰</button>
+  </form>
+</div>
+
+</body>
+</html>
