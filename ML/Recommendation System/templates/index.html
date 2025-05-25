@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Recommender</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 250px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #1db954;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        .recommendations {
+            margin-top: 30px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 5px 0;
+        }
+
+        .error {
+            color: #ff4d4d;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Movie Recommendation System</h1>
+
+    <input type="text" id="movieInput" placeholder="Enter movie title">
+    <button onclick="getRecommendations()">Recommend</button>
+
+    <div class="recommendations" id="recList"></div>
+    <div class="error" id="errorMsg"></div>
+
+    <script>
+        function getRecommendations() {
+            const movie = document.getElementById('movieInput').value;
+            const recList = document.getElementById('recList');
+            const errorMsg = document.getElementById('errorMsg');
+
+            // Clear previous results
+            recList.innerHTML = '';
+            errorMsg.innerHTML = '';
+
+            if (!movie) {
+                errorMsg.innerText = "Please enter a movie title.";
+                return;
+            }
+
+            fetch('/recommend', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ movie: movie })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    errorMsg.innerText = data.error;
+                } else {
+                    const ol = document.createElement('ol');  // Ordered list for numbering
+data.recommendations.forEach(rec => {
+    const li = document.createElement('li');
+    li.innerText = rec;
+    ol.appendChild(li);
+});
+recList.appendChild(ol);
+
+                }
+            })
+            .catch(error => {
+                errorMsg.innerText = "Something went wrong. Please try again.";
+                console.error('Error:', error);
+            });
+        }
+    </script>
+
+</body>
+</html>
