@@ -1,1 +1,15 @@
-readme
+This is the required directory structure
+
+speech_translation/
+├── app.py                     # Main Flask app
+├── utils.py                   # All processing logic: whisper, translate, etc.
+├── env310/                    # Your virtual environment (if no default)
+│
+├── static/                    # For CSS, JS, etc.
+│   └── style.css              # Optional
+│
+├── templates/                 # Jinja2 HTML templates
+│   └── index.html             # Frontend with form + dropdown
+
+
+
