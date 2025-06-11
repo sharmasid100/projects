@@ -1,0 +1,67 @@
+import os
+import whisper
+from transformers import AutoTokenizer , AutoModelForSeq2SeqLM
+
+def set_env():
+    ffmpeg_path = r"C:\Users\Siddharth\ffmpeg\ffmpeg\bin"
+    os.environ["PATH"] = ffmpeg_path + os.pathsep + os.environ["PATH"]
+
+def load_model_to_transcribe():
+    model = whisper.load_model("base")
+    return model
+
+def load_model_to_translate():
+    model_path = r"C:\models\nllb-600m"
+    tokenizer = AutoTokenizer.from_pretrained(model_path , local_files_only = True , use_fast = False)
+    model = AutoModelForSeq2SeqLM.from_pretrained(model_path , local_files_only =True)
+    return tokenizer , model
+
+def aud_to_text(path_to_audio):
+    model = load_model_to_transcribe()
+    transcribe_text = model.transcribe(path_to_audio)
+    return transcribe_text
+
+def translate(text , source , target):
+
+    tokenizer , model  = load_model_to_translate()
+    src_lang = language_codes[source.lower()]
+    tokenizer.src_lang = src_lang
+    tgt_lang = language_codes[target.lower()]
+
+    inputs = tokenizer(text , return_tensors = 'pt')
+    forced_bos_token_id = (tokenizer.convert_tokens_to_ids(tgt_lang) - 1) # -1 to adjust deallignment
+    output = model.generate(**inputs, forced_bos_token_id=forced_bos_token_id)
+    translated_text = tokenizer.decode(output[0], skip_special_tokens=True)
+    return translated_text
+
+def transcribe_and_translate(filepath):
+    set_env()
+    text = aud_to_text(filepath)['text']
+    result = translate(text , "english" , "malayalam")
+    return result
+
+language_codes = {
+    "assamese": "asm_Beng",
+    "bengali": "ben_Beng",
+    "bhojpuri": "bho_Deva",
+    "gujarati": "guj_Gujr",
+    "hindi": "hin_Deva",
+    "kannada": "kan_Knda",
+    "kashmiri": "kas_Deva",
+    "konkani": "kok_Deva",
+    "malayalam": "mal_Mlym",
+    "manipuri": "mni_Beng",
+    "marathi": "mar_Deva",
+    "nepali": "npi_Deva",
+    "odia": "ory_Orya",
+    "punjabi": "pan_Guru",  # Gurumukhi
+    "punjabi (shahmukhi)": "pan_Arab",
+    "sanskrit": "san_Deva",
+    "sindhi": "snd_Deva",  # Devanagari
+    "sindhi (arabic)": "snd_Arab",
+    "tamil": "tam_Taml",
+    "telugu": "tel_Telu",
+    "urdu": "urd_Arab",
+    "english": "eng_Latn"
+}
+
