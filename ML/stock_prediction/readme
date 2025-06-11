@@ -1,2 +1,12 @@
-.
-
+repo/
+├── app.py                     # Main Flask app
+├── env/                    # Your virtual environment (if not default)
+│
+├── static/                    # For CSS, JS, etc.
+│   └── style.css              # Optional
+│
+├── templates/                 # Jinja2 HTML templates
+│   └── index.html             # Frontend with form + dropdown
+│
+├── model         
+├── scaler
