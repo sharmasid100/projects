@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jinger – Job Finder AI</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <style>
+/* Universal Styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+    margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #0d0d0d;
+  color: #fff;
+    margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #0d0d0d;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-circle {
+  background-color: #ffcc00;
+  color: #000000;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.2rem;
+}
+
+.logo-text {
+  color: #ffcc00;
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  margin: 10px 0 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  color: #ffcc00;
+  font-weight: bold;
+}
+
+.cta-button {
+  background-color: transparent;
+  border: 2px solid #ffcc00;
+  color: #ffcc00;
+  padding: 12px 24px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 1s;
+}
+
+.cta-button-start {
+  background-color: #ffcc00;
+  border: 2px solid #ffcc00;
+  color: #000000;
+  padding: 12px 24px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 1s;
+}
+
+.cta-button-start:hover {
+  transform: scale(1.05);
+}
+
+.cta-button:hover {
+  transform: scale(1.05);
+}
+
+.click-label {
+  font-size: 14px;
+  color: #ffcc00;
+  margin-top: 8px;
+  transform: rotate(-5deg);
+  animation: pulse 1.5s infinite;
+  text-align: center;
+}
+
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-5px);
+  }
+}
+
+/* Hero Section */
+.main-section {
+  min-height: 100vh;
+  padding: 140px 40px 80px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: url('{{ url_for("static", filename="job_img.jpg") }}') no-repeat center center / cover;
+}
+
+.main-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 0;
+}
+
+.main-text {
+  max-width: 700px;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.main-text h3,
+.main-text h1,
+.main-text p,
+.main-text .cta-wrapper {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.main-text h3 {
+  font-weight: 400;
+  color: #bbb;
+}
+
+.main-text h1 {
+  font-size: 3rem;
+  color: #ffcc00;
+  margin: 20px 0;
+}
+
+.main-text p {
+  color: #ddd;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.cta-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Section Styling */
+section {
+  padding: 100px 40px;
+  text-align: center;
+}
+
+section p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 850px;
+  margin: auto;
+  color: #ccc;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 40px 0;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* City tag */
+.city-tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.city-tags span {
+  background-color: #222;
+  color: #ffcc00;
+  padding: 10px 20px;
+  border-radius: 30px;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 15px;
+    text-align: center;
+  }
+
+  .logo-text {
+    justify-content: center;   /* center horizontally */
+    align-items: center;      /* make sure it’s horizontal */
+  }
+
+.logo-circle {
+  background-color: #ffcc00;
+  color: #000000;
+  border-radius: 20%;           /* Perfect circle */
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;             /* '1400' is invalid, max is 900 */
+  font-size: 1.5rem;
+}
+
+  
+
+
+  .navbar ul {
+    flex-direction: row; /* keep links horizontal */
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 10px 0 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .navbar div:last-child {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+
+  </style>
+</head>
+
+<body id="home">
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <div class="logo-circle">J</div>
+      <div class="logo-text">Jinger</div>
+    </div>
+    <ul>
+      <li><a href="#home">HOME</a></li>
+      <li><a href="https://github.com/sharmasid100/projects/tree/main/ML/jobfinder" target="_blank">PROJECT REPO</a>
+      </li>
+      <li><a href="#about">ABOUT</a></li>
+      <li><a href="#contact">CONTACT</a></li>
+    </ul>
+    <div style="display: flex; flex-direction: column; align-items: center;">
+  <a href="{{ url_for('form') }}">
+    <button class="cta-button-start">GET STARTED</button>
+  </a>
+  <div class="click-label">click me ↑</div>
+</div>
+
+  </header>
+
+
+  <!-- Hero Section -->
+  <section class="main-section">
+    <div class="main-text">
+      <h3>HI, THIS IS JINGER</h3>
+      <h1>FIND THE PERFECT JOB ROLE</h1>
+      <p>Enter your preferences and skills, and get AI-powered job suggestions — tailored for you. With real-time links
+        to apply across India and the globe.</p>
+      <div class="cta-wrapper">
+        <a href="{{ url_for('learn_more') }}">
+          <button class="cta-button">LEARN MORE</button>
+        </a>
+      </div>
+
+
+      </a>
+    </div>
+  </section>
+
+  <!-- India Section -->
+  <section style="background-color: #151515;">
+    <h2 style="color: #ffcc00;">India-Wide Opportunities</h2>
+    <p style="color: #ccc; max-width: 850px; margin: auto; font-size: 1.05rem; line-height: 1.7;">
+      From the buzzing startup ecosystem of Bangalore to the vibrant digital innovation hubs of Cochin,
+      <strong>Jinger</strong> brings
+      you personalized job recommendations tailored to the unique opportunities in every major Indian city. Whether it's
+      the IT corridors of Hyderabad, the fintech capital Mumbai, or the research-driven institutions in Chennai and
+      Pune, <strong>Jinger</strong> understands the regional job landscape and helps you align your skills and goals
+      with the right roles
+      — no matter where in India you are.
+    </p>
+<div class="city-tags">
+  {% for city in ['Mumbai','Delhi','Bangalore','Hyderabad','Chennai','Kolkata','Pune','Ahmedabad','Cochin','Jaipur','Nagpur','Indore'] %}
+    <span class="city-tag">{{ city }}</span>
+  {% endfor %}
+</div>
+
+  </section>
+
+  <!-- Global Section -->
+  <section style="background-color: #1a1a1a;">
+    <h2 style="color: #ffcc00;">Across Globe</h2>
+    <p style="color: #ccc; max-width: 850px; margin: auto; font-size: 1.05rem; line-height: 1.7;">
+      From the innovation-driven Silicon Valley in San Francisco to the financial powerhouses of London, Berlin’s
+      vibrant startup culture to Tokyo’s cutting-edge tech scene — Jinger bridges you to the world’s leading job
+      markets. With real-time role matching based on your unique profile, skills, and interests, Jinger ensures you're
+      not just applying to jobs, you're aligning with global opportunities tailored to your growth.
+    </p>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 40px;">
+      {% for city in ['New York','San
+      Francisco','London','Berlin','Paris','Singapore','Sydney','Tokyo','Toronto','Chicago','Los
+      Angeles','Barcelona','Amsterdam','Seoul','Dubai','Stockholm'] %}
+      <span style="background-color: #222; color: #ffcc00; padding: 10px 20px; border-radius: 30px;">{{ city }}</span>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" style="background-color: #111;">
+    <h2 style="color: #ffcc00;">About This Project</h2>
+    <div
+      style="max-width: 900px; margin: auto; color: #ccc; text-align: justify; line-height: 1.8; font-size: 1.05rem;">
+      <p><strong>Jinger</strong> is a job recommendation platform powered by machine learning (AdaBoost Classifier) and
+        real-time data via JSearch API. It analyzes user preferences, technical skills, domain choices, and experience
+        to predict the most suitable job role. Once predicted, it fetches matching job listings from platforms like
+        LinkedIn and ZipRecruiter using RapidAPI integration.</p>
+      <p>The system uses preprocessing techniques like Label Encoding (LE) and One-Hot Encoding (OHE) to format user
+        data. It’s built on Flask, scikit-learn, and modern HTML/CSS, and deployable on both local and cloud
+        environments.</p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2 style="color: #ffcc00;">Contact</h2>
+    <p style="color: #ccc;">For inquiries or collaborations:</p>
+    <p style="color: #ccc;">📧 contact@jinger.ai</p>
+    <p style="color: #ccc;">🐦 Twitter: @jinger_ai</p>
+  </section>
+
+  <footer class="footer">
+    © 2025 Jinger. All rights reserved.
+  </footer>
+
+  <script>
+    window.addEventListener("load", () => {
+      const navText = document.querySelector(".logo-text");
+
+      // Animate logo-text appearing from "J"
+      gsap.to(navText, {
+        opacity: 1,
+        x: 0,
+        duration: 1,
+        delay: 0.3,
+        ease: "power3.out"
+      });
+
+      // Animate hero text fade-up
+      gsap.to(".main-text h3", { opacity: 1, y: 0, duration: 1.5, delay: 0.2, ease: "power3.out" });
+      gsap.to(".main-text h1", { opacity: 1, y: 0, duration: 1.5, delay: 0.2, ease: "power3.out" });
+      gsap.to(".main-text p", { opacity: 1, y: 0, duration: 1.5, delay: 0.2, ease: "power3.out" });
+      gsap.to(".main-text a", { opacity: 1, y: 0, duration: 1.5, delay: 0.2, ease: "power3.out" });
+      gsap.to(".cta-wrapper", { opacity: 1, y: 0, duration: 1.5, delay: 0.2, ease: "power3.out" });
+      
+    });
+  </script>
+
+</body>
+
+</html>

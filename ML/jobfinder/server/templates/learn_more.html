@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>How Jinger Works</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      scroll-behavior: smooth;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: white;
+      color: #111;
+      padding-top: 80px;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #ffcc00;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      opacity: 0;
+      transform: translateX(20px);
+    }
+
+    .logo-circle {
+      background-color: #000;
+      color: #ffcc00;
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.2rem;
+    }
+
+    .logo-text {
+      color: #000;
+      font-weight: bold;
+      font-size: 1.4rem;
+      letter-spacing: 1px;
+    }
+
+    .navbar ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+    }
+
+    .navbar a {
+      color: #000;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .navbar a:hover {
+      text-decoration: underline;
+    }
+
+    .page-content {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .container {
+      max-width: 950px;
+      margin: auto;
+      padding: 40px 20px;
+      line-height: 1.8;
+    }
+
+    h1 {
+      color: #222;
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2.4rem;
+    }
+
+    h2 {
+      color: #444;
+      margin-top: 40px;
+      font-size: 1.5rem;
+    }
+
+    p {
+      max-width: 900px;
+      margin: auto;
+      text-align: justify;
+      font-size: 1.05rem;
+    }
+
+    ul {
+      max-width: 880px;
+      margin: 20px auto;
+      padding-left: 20px;
+      font-size: 1.05rem;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 15px 20px;
+      }
+
+      .logo {
+        justify-content: center;
+        transform: translateX(20px);
+      }
+
+      .navbar ul {
+        flex-direction: row;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 10px;
+        padding: 0;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <div class="logo-circle">J</div>
+      <div class="logo-text">Jinger</div>
+    </div>
+    <ul>
+      <li><a href="/">HOME</a></li>
+      <li><a href="https://github.com/sharmasid100/projects/tree/main/ML/jobfinder" target="_blank">PROJECT REPO</a></li>
+    </ul>
+  </header>
+
+  <!-- All animated content inside -->
+  <div class="page-content">
+    <div class="container">
+      <h1>How Jinger Works</h1>
+
+      <p><strong>Jinger</strong> is a machine learning–powered recommendation system designed to assist students, job seekers,
+        and professionals in identifying the most suitable job roles based on their background, interests, and technical skills.</p>
+
+      <h2>1. Data Preprocessing</h2>
+      <p>The system uses multiple preprocessing techniques to convert user inputs into machine-readable form:</p>
+      <ul>
+        <li><strong>Label Encoding (LE):</strong> Converts categorical features like education or interest area into numerical labels.</li>
+        <li><strong>One-Hot Encoding (OHE):</strong> Transforms multi-class features such as known programming languages or frameworks into binary vectors.</li>
+        <li>Form inputs are parsed and transformed using Scikit-learn’s preprocessing pipeline before feeding them to the model.</li>
+      </ul>
+
+      <h2>2. Model Architecture</h2>
+      <p>The prediction engine is powered by the <strong>AdaBoost Classifier</strong> — an ensemble learning algorithm that combines multiple weak learners into a strong classifier.</p>
+      <ul>
+        <li>Scikit-learn’s AdaBoost implementation is used with DecisionTreeClassifier as the base estimator.</li>
+        <li>Training is done using labeled user profile–role data pairs.</li>
+        <li>Hyperparameter tuning and cross-validation are employed to improve performance.</li>
+      </ul>
+
+      <h2>3. Real-Time Job Matching</h2>
+      <p>
+        Once a role is predicted, Jinger uses the <strong>JSearch API</strong> (via RapidAPI) to fetch real-time job listings
+        from top hiring platforms.
+      </p>
+      <ul>
+        <li>Dynamic query building with predicted role and user-selected location (e.g., “Frontend Intern jobs in Tokyo”).</li>
+        <li>Jobs parsed from JSearch JSON responses including title, company, location, and apply link.</li>
+        <li>Results are displayed to users in real-time with styled job cards and external apply buttons.</li>
+      </ul>
+
+      <h2>4. Technologies Used</h2>
+      <ul>
+        <li><strong>Frontend:</strong> HTML, CSS (W3CSS + custom), responsive UI with Flexbox</li>
+        <li><strong>Backend:</strong> Flask (Python), Jinja2 templates</li>
+        <li><strong>Machine Learning:</strong> Scikit-learn (AdaBoost), Pandas, NumPy</li>
+        <li><strong>API Integration:</strong> JSearch API (via RapidAPI)</li>
+        <li><strong>Deployment:</strong> Flask local server (Heroku/AWS-compatible)</li>
+      </ul>
+
+      <h2>5. Future Enhancements</h2>
+      <ul>
+        <li>Resume parsing & auto skill extraction</li>
+        <li>User dashboard for profile history</li>
+        <li>Job role–based salary prediction</li>
+        <li>Feedback-based model improvement</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Animation Script -->
+  <script>
+    window.addEventListener("load", () => {
+      // Animate logo text
+      gsap.to(".logo", {
+        opacity: 1,
+        x: 0,
+        duration: 1,
+        delay: 0.3,
+        ease: "power3.out"
+      });
+
+      // Animate page content
+      gsap.to(".page-content", {
+        opacity: 1,
+        y: 0,
+        duration: 1.5,
+        delay: 0.5,
+        ease: "power3.out"
+      });
+    });
+  </script>
+
+</body>
+</html>
