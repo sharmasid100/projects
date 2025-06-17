@@ -1,0 +1,76 @@
+{
+    "target": "recommended_job_role",
+    "recommended_job_role":["software engineer" , "developer" , "intern" , "data analyst" , "ml engineer" , "devops" , "frontend developer" , "backend developer" ],
+    "attributes": {
+        "interest_area": [
+            "Creativity",
+            "Logic",
+            "Both"
+        ],
+        "coding_interest_level": [
+            "None",
+            "Beginner",
+            "Intermediate",
+            "Advanced"
+        ],
+        "preferred_domain": [
+            "Frontend",
+            "Backend",
+            "Full Stack",
+            "AI/ML",
+            "Data Science",
+            "Cybersecurity",
+            "DevOps"
+        ],
+        "current_degree": [
+            "Bachelors",
+            "Masters",
+            "Diploma"
+        ],
+        "field_of_study": [
+            "CS",
+            "Non-CS"
+        ],
+        "current_status": [
+            "Pursuing Degree",
+            "Intern",
+            "Trainee",
+            "Job Seeker",
+            "Working Professional"
+        ],
+        "known_languages": [
+            "Python",
+            "JavaScript",
+            "Java",
+            "C++",
+            "C",
+            "R",
+            "SQL",
+            "None"
+        ],
+        "frameworks_known": [
+            "React",
+            "Node",
+            "Flask",
+            "Django",
+            "TensorFlow",
+            "PyTorch",
+            "Scikit-learn",
+            "None"
+        ],
+        "job_type_preference": [
+            "Internship",
+            "Full-time Job",
+            "Freelance",
+            "Remote",
+            "Onsite"
+        ],
+        "job_experience": [
+            "None",
+            "1+",
+            "3+"
+        ]
+    }
+}
+
+
