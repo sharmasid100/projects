@@ -1,0 +1,60 @@
+from sloth.parser import parser
+from sloth.lexer import lexer
+from sloth.semantic import SemanticAnalyzer
+from sloth.interpreter import Interpreter
+
+code = '''
+<< Check all core features >>
+
+let x = input_int();
+let flag = input_bool();
+let message = input_string();
+
+print("Starting test...");
+
+do add(a, b) {
+    return a + b;
+}
+
+print("Sum of 3 and 4 is:");
+print(add(3, 4));
+print("\\n");
+do testLoop(n) {
+    let i = 0;
+    repeat(i < n) {
+        if i == 5 {
+            print("Breaking at i = 5");
+            break;
+        }
+        print(i);print("\\n");
+        i = i + 1;
+    }
+}
+
+testLoop(x);
+
+if flag {
+    print("Flag is true!");print("\\n");
+} else {
+    print("Flag is false!");print("\\n");
+}
+
+print("Your message was: ");print("\\n");
+print(message);
+print("\\n");
+
+let arr = [10, 20, 30];
+print("Accessing arr[1] : ");
+print(arr[1]);
+print("\\n");
+print("All tests completed.");
+
+'''
+
+ast = parser.parse(code, lexer=lexer)
+
+analyzer = SemanticAnalyzer()
+analyzer.analyze(ast)
+
+interpreter = Interpreter()
+interpreter.run(ast)

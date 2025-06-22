@@ -1,0 +1,108 @@
+Custom Language Documentation
+-------------------------------
+
+ 1. Variable Declaration
+Syntax:
+    let variable_name = expression;
+
+Examples:
+    let x = 10;
+    let name = "Alice";
+    let flag = true;
+
+ 2. Input
+Syntax:    let x = input_int();
+    let name = input_string();
+    let flag = input_bool();
+
+ 3. Print
+Syntax:
+    print(expression);
+
+Examples:
+    print("Hello, world!");
+    print(x);
+
+ 4. Functions
+Syntax:
+    do function_name(param1, param2, ...) {
+        // body
+        return expression;
+    }
+
+Calling:
+    function_name(arg1, arg2);
+
+Example:
+    do add(a, b) {
+        return a + b;
+    }
+    print(add(3, 4));  // Output: 7
+
+ 5. Conditionals
+Syntax:
+    if condition {
+        // then block
+    } else {
+        // else block
+    }
+
+Example:
+    if x > 10 {
+        print("Big");
+    } else {
+        print("Small");
+    }
+
+ 6. Loops
+Syntax:
+    repeat(condition) {
+        // body
+    }
+
+Supports:
+    - break;   // to exit loop early
+
+Example:
+    let i = 0;
+    repeat(i < 5) {
+        print(i);
+        i = i + 1;
+    }
+
+ 7. Lists and Indexing
+List Declaration:
+    let arr = [1, 2, 3];
+
+Index Access:
+    print(arr[0]);  // prints 1
+
+Function with List:
+    do print_first(arr) {
+        print(arr[0]);
+    }
+    print_first([10, 20, 30]);
+
+ 8. Return Statement
+Syntax:
+    return expression;
+
+Example:
+    do double(x) {
+        return x + x;
+    }
+
+ 9. Type Detection
+Syntax:
+    typeof(expression);
+
+Example:
+    let msg = "Hello";
+    print(typeof(msg));   <<Output: string>>
+
+ 10. Comments
+Syntax : 
+        << comment >>
+Example:
+        <<This is an example comment>>
+

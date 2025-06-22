@@ -1,0 +1,2 @@
+[console_scripts]
+sloth = sloth.__main__:main

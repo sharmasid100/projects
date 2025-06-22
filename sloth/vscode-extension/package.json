@@ -1,0 +1,40 @@
+{
+  "name": "slothdemolang",                       
+  "displayName": "Sloth_by_zonet",              
+  "description": "Syntax highlighting and support for the Sloth programming language (.slw files).",
+  "version": "0.0.1",
+  "publisher": "zonet",                          
+  "engines": {
+    "vscode": "^1.81.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sidsharma100/slothlang.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sidsharma100/slothlang/issues"
+  },
+  "homepage": "https://github.com/sidsharma100/slothlang",
+  "keywords": ["sloth", "language", "syntax", "highlight", "slw"],
+  "license": "MIT",
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "sloth",
+        "aliases": ["Sloth", "sloth"],
+        "extensions": [".slw"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "sloth",
+        "scopeName": "source.sloth",
+        "path": "./syntaxes/sloth.tmLanguage.json"
+      }
+    ]
+  }
+}

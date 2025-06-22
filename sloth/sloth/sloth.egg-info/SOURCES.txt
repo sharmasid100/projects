@@ -1,0 +1,15 @@
+setup.py
+sloth/__init__.py
+sloth/__main__.py
+sloth/interpreter.py
+sloth/lexer.py
+sloth/parser.py
+sloth/parsetab.py
+sloth/repl.py
+sloth/run.py
+sloth/semantic.py
+sloth.egg-info/PKG-INFO
+sloth.egg-info/SOURCES.txt
+sloth.egg-info/dependency_links.txt
+sloth.egg-info/entry_points.txt
+sloth.egg-info/top_level.txt

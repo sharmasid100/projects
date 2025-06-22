@@ -1,0 +1,100 @@
+===========================================
+🦥 SLOTH LANGUAGE - PROJECT INSTRUCTIONS
+===========================================
+
+This project contains:
+1. Sloth Programming Language (interpreter in Python)
+2. VS Code Extension for .slw syntax highlighting
+
+-------------------------------------------
+📁 PROJECT STRUCTURE
+-------------------------------------------
+
+slothlang/
+│
+├── sloth/                        ← Python source for the Sloth interpreter
+│   ├── lexer.py
+│   ├── parser.py
+│   ├── semantic_analyzer.py
+│   ├── interpreter.py
+│   ├── run.py                    ← Entry point for running .slw files
+│   └── repl.py                   ← Optional REPL interface
+│
+├── vscode-extension/            ← VS Code language support
+│   ├── syntaxes/sloth.tmLanguage.json
+│   ├── language-configuration.json
+│   ├── package.json             ← VS Code extension config
+│   ├── README.md
+│   ├── LICENSE.md
+│   └── CHANGELOG.md
+│
+├── sample_programs/             ← Example .slw files
+│   └── hello_world.slw
+│
+├── requirements.txt             ← Python dependencies (for interpreter)
+├── setup.py                     ← Installable Python CLI entry point
+├── README.md                    ← Main repo description
+├── INSTRUCTIONS.txt             ← (this file)
+└── .gitignore
+
+
+-------------------------------------------
+⚙️ INSTALLING & USING THE LANGUAGE (Python)
+-------------------------------------------
+
+1. Install dependencies:
+    pip install -r requirements.txt
+
+2. Install the CLI locally:
+    python setup.py install
+
+3. Run a Sloth program:
+    sloth sample_programs/hello_world.slw
+
+4. Use REPL mode (optional):
+    sloth
+
+
+-------------------------------------------
+💻 INSTALLING THE VS CODE EXTENSION LOCALLY
+-------------------------------------------
+
+1. Navigate to the vscode-extension folder:
+    cd vscode-extension
+
+2. Make sure you have `vsce` installed globally:
+    npm install -g @vscode/vsce
+
+3. Package the extension:
+    vsce package
+
+   This will create a .vsix file like:
+   slothdemolang-0.0.1.vsix
+
+4. Install the extension in VS Code:
+    code --install-extension slothdemolang-0.0.1.vsix
+
+5. Open any `.slw` file to test syntax highlighting.
+
+
+-------------------------------------------
+🛠️ TROUBLESHOOTING
+-------------------------------------------
+
+- VS Code doesn’t recognize .slw files:
+  → Ensure the extension is installed and you opened a `.slw` file after installation.
+
+- `sloth` command not found:
+  → Check that your Python environment is activated.
+  → Run: `pip show slothlang` to verify it's installed.
+
+- Syntax conflicts in the parser:
+  → Run your parser generator again if needed and check warnings.
+
+-------------------------------------------
+🔗 CREDITS
+
+Created by Siddharth Sharma (github.com/sidsharma100)
+MIT License
+
+Enjoy building with Sloth 🦥
